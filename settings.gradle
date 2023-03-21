@@ -1,2 +1,5 @@
 rootProject.name = 'module-search'
-include('module-rds')
+include('module-domain')
+include('search-app-api')
+include('clients')
+include('module-internal-core')
