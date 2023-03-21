@@ -1,0 +1,3 @@
+open-api:
+  kakao:
+    url: https://dapi.kakao.com
