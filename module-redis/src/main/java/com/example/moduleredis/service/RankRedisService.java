@@ -16,10 +16,23 @@ import java.util.stream.Collectors;
 public class RankRedisService {
     private final StringRedisTemplate stringRedisTemplate;
 
-    public void RankUpToQuery(String query, String key, int incrementSize) {
+    /**
+     * 검색어의 검색 횟수를 incrementSize만큼 증가
+     * @param query
+     * @param key
+     * @param incrementSize
+     */
+    public void rankUpToQuery(String query, String key, int incrementSize) {
         stringRedisTemplate.opsForZSet().incrementScore(key, query, incrementSize);
     }
 
+    /**
+     * startIdx ~ endIdx 까지의 인기 검색어 출력
+     * @param key
+     * @param startIdx
+     * @param endIdx
+     * @return
+     */
     public List<RankDto> findRankReverseOrder(String key, int startIdx, int endIdx) {
         ZSetOperations ZSetOperations = stringRedisTemplate.opsForZSet();
         Set<ZSetOperations.TypedTuple<String>>typedTuples
@@ -29,5 +42,9 @@ public class RankRedisService {
         return typedTuples.stream()
                 .map(RankDto::convertToResponseRankingDto)
                 .collect(Collectors.toList());
+    }
+
+    public void deleteRedisKey(String key) {
+        stringRedisTemplate.delete(key);
     }
 }

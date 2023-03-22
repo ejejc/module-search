@@ -1,6 +1,6 @@
 package com.example.clients.feign.config;
 
-import com.example.clients.feign.dto.SearchRes;
+import com.example.clients.feign.kakao.dto.SearchRes;
 import com.example.core.exception.CommonException;
 import com.example.core.exception.KakaoClientException;
 import com.example.core.exception.KakaoServerException;
@@ -29,6 +29,7 @@ public class KaKaoFeignConfiguration implements ErrorDecoder  {
             return new CommonException(HttpStatusCode.INTERNAL_SERVER_ERROR, "내부 오류가 발생했습니다. 잠시 후에 다시 시도해주세요.");
         }
 
+        // 에러 응답값에 따른 에러 처리
         HttpStatus status = HttpStatus.valueOf(response.status());
         if (status.is4xxClientError()) {
             return new KakaoClientException(HttpStatusCode.findStatusCode(response.status()), errorBody.getMessage(), errorBody.getErrorType());

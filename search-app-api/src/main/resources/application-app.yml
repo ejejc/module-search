@@ -1,3 +1,7 @@
 open-api:
   kakao:
     url: https://dapi.kakao.com
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
