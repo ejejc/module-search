@@ -6,7 +6,6 @@ ext {
 
 dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.4.2'
     implementation project(":module-internal-core")
     implementation project(":module-domain")
 }

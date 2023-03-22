@@ -1,15 +1,16 @@
 package com.example.searchappapi.controller;
 
 import com.example.clients.feign.dto.SearchReq;
-import com.example.clients.feign.dto.SearchRes;
 import com.example.domain.common.ApiResponse;
-import com.example.searchappapi.domain.RankDto;
+import com.example.moduleredis.domain.RankDto;
 import com.example.searchappapi.domain.SearchDto;
 import com.example.searchappapi.service.SearchService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 import static com.example.clients.feign.dto.SearchRes.*;
 
@@ -27,7 +28,7 @@ public class SearchController {
     }
 
     @GetMapping("/popular/query")
-    public ApiResponse<RankDto> searchPopularQuery() {
+    public ApiResponse<List<RankDto>> searchPopularQuery() {
         return ApiResponse.createOk(searchService.searchPopularQuery());
     }
 }
